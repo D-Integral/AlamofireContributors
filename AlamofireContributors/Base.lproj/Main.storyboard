@@ -76,9 +76,48 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XfR-wb-FPn">
+                                <rect key="frame" x="0.0" y="64" width="375" height="375"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="XfR-wb-FPn" secondAttribute="height" multiplier="1:1" id="4PX-W0-FYM"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contributions:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kug-C9-Lnp">
+                                <rect key="frame" x="16" y="447" width="167.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72w-a6-0Gb">
+                                <rect key="frame" x="191.5" y="447" width="167.5" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Idd-sq-VkR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Kug-C9-Lnp" firstAttribute="width" secondItem="72w-a6-0Gb" secondAttribute="width" id="0Z7-42-iHN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="72w-a6-0Gb" secondAttribute="trailing" constant="16" id="Aa3-LM-eT5"/>
+                            <constraint firstItem="Kug-C9-Lnp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="EJf-6g-fwa"/>
+                            <constraint firstItem="72w-a6-0Gb" firstAttribute="top" secondItem="XfR-wb-FPn" secondAttribute="bottom" constant="8" id="M3G-5k-7Rk"/>
+                            <constraint firstItem="XfR-wb-FPn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Oi6-fi-2Pd"/>
+                            <constraint firstItem="XfR-wb-FPn" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Olo-EB-1l4"/>
+                            <constraint firstItem="72w-a6-0Gb" firstAttribute="leading" secondItem="Kug-C9-Lnp" secondAttribute="trailing" constant="8" id="aba-p2-1AJ"/>
+                            <constraint firstItem="72w-a6-0Gb" firstAttribute="top" secondItem="XfR-wb-FPn" secondAttribute="bottom" constant="8" id="lRp-vE-TP2"/>
+                            <constraint firstItem="XfR-wb-FPn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pvP-kJ-v7j"/>
+                            <constraint firstItem="Kug-C9-Lnp" firstAttribute="top" secondItem="XfR-wb-FPn" secondAttribute="bottom" constant="8" id="qZn-RJ-UUj"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="avatarImageView" destination="XfR-wb-FPn" id="1sA-Pj-0gp"/>
+                        <outlet property="numberOfContributionsLabel" destination="72w-a6-0Gb" id="uMz-nG-lDW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
