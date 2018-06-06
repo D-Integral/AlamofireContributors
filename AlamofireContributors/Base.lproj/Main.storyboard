@@ -31,6 +31,8 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nTt-dl-jZT">
                                             <rect key="frame" x="16" y="11" width="28" height="28"/>
                                             <constraints>
+                                                <constraint firstAttribute="width" constant="28" id="bzN-Cy-6Nv"/>
+                                                <constraint firstAttribute="height" constant="28" id="dAe-7w-CQ3"/>
                                                 <constraint firstAttribute="width" secondItem="nTt-dl-jZT" secondAttribute="height" multiplier="1:1" id="fqQ-Lz-KeT"/>
                                             </constraints>
                                         </imageView>

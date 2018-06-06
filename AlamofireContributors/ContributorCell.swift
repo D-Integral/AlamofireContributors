@@ -9,7 +9,7 @@
 import UIKit
 
 class ContributorCell: UITableViewCell {
-
+    
     @IBOutlet weak var contributorAvatarImageView: UIImageView!
     @IBOutlet weak var contributorNameLabel: UILabel!
     var asynchronousImageLoadingDispatchWorkItemGlobal: DispatchWorkItem? = nil

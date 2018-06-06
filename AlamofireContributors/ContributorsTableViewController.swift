@@ -11,6 +11,7 @@ import UIKit
 class ContributorsTableViewController: UITableViewController {
     
     var contributors: [Contributor] = []
+    let cache = NSCache<NSString, NSData>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,18 +51,20 @@ class ContributorsTableViewController: UITableViewController {
             let index = indexPath.row
             contributorCell.index = index
             
-            let cache = NSCache<NSString, NSData>()
             let cachdedData: Data
-            let key = "CachedImage" + String(index)
+            let key = contributor.avatar_url.absoluteString
             
             if let cachedVersion = cache.object(forKey: key as NSString) {
                 cachdedData = cachedVersion as Data
                 contributorCell.contributorAvatarImageView.image = UIImage(data: cachdedData as Data)
+                contributorCell.contributorAvatarImageView.contentMode = .scaleAspectFit
                 contributorCell.layoutSubviews()
             } else {
-                let dispatchWorkItemGlobal = DispatchWorkItem {
+                let dispatchWorkItemGlobal = DispatchWorkItem { [weak self] in
+                    guard let this = self else { return }
+                    
                     if let data = NSData(contentsOf: contributor.avatar_url) {
-                        cache.setObject(data, forKey: key as NSString)
+                        this.cache.setObject(data, forKey: key as NSString)
                         
                         if contributorCell.index == index {
                             let dispatchWorkItemMain = DispatchWorkItem {
