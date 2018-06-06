@@ -47,30 +47,43 @@ class ContributorsTableViewController: UITableViewController {
             let contributor = contributors[indexPath.row]
             
             contributorCell.contributorNameLabel.text = contributor.login
+            let index = indexPath.row
+            contributorCell.index = index
             
             let cache = NSCache<NSString, NSData>()
             let cachdedData: Data
-            let key = "CachedImage" + String(indexPath.row)
+            let key = "CachedImage" + String(index)
             
             if let cachedVersion = cache.object(forKey: key as NSString) {
                 cachdedData = cachedVersion as Data
                 contributorCell.contributorAvatarImageView.image = UIImage(data: cachdedData as Data)
                 contributorCell.layoutSubviews()
             } else {
-                DispatchQueue.global(qos: .userInitiated).async {
+                let dispatchWorkItemGlobal = DispatchWorkItem {
                     if let data = NSData(contentsOf: contributor.avatar_url) {
                         cache.setObject(data, forKey: key as NSString)
-                        DispatchQueue.main.async {
-                            contributorCell.contributorAvatarImageView.image = UIImage(data: data as Data)
-                            cell.layoutSubviews()
+                        
+                        if contributorCell.index == index {
+                            let dispatchWorkItemMain = DispatchWorkItem {
+                                contributorCell.contributorAvatarImageView.image = UIImage(data: data as Data)
+                                cell.layoutSubviews()
+                            }
+                            
+                            contributorCell.asynchronousImageLoadingDispatchWorkItemMain = dispatchWorkItemMain
+                            
+                            DispatchQueue.main.async(execute: dispatchWorkItemMain)
                         }
                     }
                 }
+                
+                contributorCell.asynchronousImageLoadingDispatchWorkItemGlobal = dispatchWorkItemGlobal
+                DispatchQueue.global(qos: .userInitiated).async(execute: dispatchWorkItemGlobal)
             }
         }
 
         return cell
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let detailsVC = segue.destination as? ContributorDetailsViewController,
             let selectedRow = tableView.indexPathForSelectedRow?.row {

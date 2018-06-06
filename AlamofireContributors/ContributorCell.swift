@@ -12,6 +12,9 @@ class ContributorCell: UITableViewCell {
 
     @IBOutlet weak var contributorAvatarImageView: UIImageView!
     @IBOutlet weak var contributorNameLabel: UILabel!
+    var asynchronousImageLoadingDispatchWorkItemGlobal: DispatchWorkItem? = nil
+    var asynchronousImageLoadingDispatchWorkItemMain: DispatchWorkItem? = nil
+    var index: Int? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,6 +22,10 @@ class ContributorCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        asynchronousImageLoadingDispatchWorkItemGlobal?.cancel()
+        asynchronousImageLoadingDispatchWorkItemGlobal = nil
+        asynchronousImageLoadingDispatchWorkItemMain?.cancel()
+        asynchronousImageLoadingDispatchWorkItemMain = nil
         contributorAvatarImageView.image = nil
         contributorNameLabel.text = nil
     }
