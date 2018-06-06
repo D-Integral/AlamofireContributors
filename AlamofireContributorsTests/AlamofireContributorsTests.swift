@@ -21,7 +21,13 @@ class AlamofireContributorsTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testAPIClient() {
+        let exp = expectation(description: "ContributorsHaveBeenReceived")
+        APIClient.shared.requestContributors { contributors in
+            XCTAssert(contributors.count > 0)
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 5)
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
