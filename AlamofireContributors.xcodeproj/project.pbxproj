@@ -31,6 +31,9 @@
 		C3E06C5E20C7DC0600D05D5F /* ContributorDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C321088120C554DE002DC39F /* ContributorDetailsViewController.swift */; };
 		C3E06C5F20C7DC1000D05D5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C321087F20C554DE002DC39F /* AppDelegate.swift */; };
 		C3E06C6020C7DC1100D05D5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C321087F20C554DE002DC39F /* AppDelegate.swift */; };
+		C3E06C9F20C8569200D05D5F /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E06C9E20C8569200D05D5F /* Cache.swift */; };
+		C3E06CA020C8569200D05D5F /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E06C9E20C8569200D05D5F /* Cache.swift */; };
+		C3E06CA120C8569200D05D5F /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E06C9E20C8569200D05D5F /* Cache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +72,7 @@
 		C32108B420C5573B002DC39F /* ContributorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributorCell.swift; sourceTree = "<group>"; };
 		C32108B820C55D4B002DC39F /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		C32108BC20C55E52002DC39F /* Contributor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contributor.swift; sourceTree = "<group>"; };
+		C3E06C9E20C8569200D05D5F /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +128,7 @@
 				C32108B020C555AA002DC39F /* ContributorsTableViewController.swift */,
 				C32108B420C5573B002DC39F /* ContributorCell.swift */,
 				C32108B820C55D4B002DC39F /* APIClient.swift */,
+				C3E06C9E20C8569200D05D5F /* Cache.swift */,
 				C32108BC20C55E52002DC39F /* Contributor.swift */,
 				C321088320C554DE002DC39F /* Main.storyboard */,
 				C321088920C554E0002DC39F /* Assets.xcassets */,
@@ -285,6 +290,7 @@
 			files = (
 				C321088220C554DE002DC39F /* ContributorDetailsViewController.swift in Sources */,
 				C32108B520C5573B002DC39F /* ContributorCell.swift in Sources */,
+				C3E06C9F20C8569200D05D5F /* Cache.swift in Sources */,
 				C32108BD20C55E52002DC39F /* Contributor.swift in Sources */,
 				C32108B120C555AA002DC39F /* ContributorsTableViewController.swift in Sources */,
 				C321088020C554DE002DC39F /* AppDelegate.swift in Sources */,
@@ -299,6 +305,7 @@
 			files = (
 				C321089820C554E0002DC39F /* AlamofireContributorsTests.swift in Sources */,
 				C32108BE20C55E52002DC39F /* Contributor.swift in Sources */,
+				C3E06CA020C8569200D05D5F /* Cache.swift in Sources */,
 				C32108B220C555AA002DC39F /* ContributorsTableViewController.swift in Sources */,
 				C32108B620C5573B002DC39F /* ContributorCell.swift in Sources */,
 				C3E06C5F20C7DC1000D05D5F /* AppDelegate.swift in Sources */,
@@ -313,6 +320,7 @@
 			files = (
 				C32108A320C554E0002DC39F /* AlamofireContributorsUITests.swift in Sources */,
 				C32108BF20C55E52002DC39F /* Contributor.swift in Sources */,
+				C3E06CA120C8569200D05D5F /* Cache.swift in Sources */,
 				C32108B320C555AA002DC39F /* ContributorsTableViewController.swift in Sources */,
 				C32108B720C5573B002DC39F /* ContributorCell.swift in Sources */,
 				C3E06C6020C7DC1100D05D5F /* AppDelegate.swift in Sources */,

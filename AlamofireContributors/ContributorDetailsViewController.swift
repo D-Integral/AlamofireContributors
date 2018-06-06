@@ -13,9 +13,28 @@ class ContributorDetailsViewController: UIViewController {
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var numberOfContributionsLabel: UILabel!
     
+    var loaded = false
+    
+    var avatarImageData: Data? = nil
+    var numberOfContributions: Int? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        loaded = true
+        update()
+    }
+    
+    func update() {
+        if loaded {
+            if let data = avatarImageData, let image = UIImage(data: data) {
+                avatarImageView.image = image
+            }
+            
+            if let theNumberOfContributions = numberOfContributions {
+                numberOfContributionsLabel.text = String(theNumberOfContributions)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
