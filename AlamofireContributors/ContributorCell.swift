@@ -25,4 +25,20 @@ class ContributorCell: UITableViewCell {
         contributorNameLabel.text = nil
     }
 
+    func update(withContributor contributor: Contributor, newIndex: Int) {
+        contributorNameLabel.text = contributor.login
+        index = newIndex
+        URL = contributor.avatar_url
+        
+        let cachedData: Data
+        
+        if let cachedVersion = Cache.shared.dataForKey(contributor.avatar_url.absoluteString) {
+            cachedData = cachedVersion as Data
+            contributorAvatarImageView.image = UIImage(data: cachedData as Data)
+            contributorAvatarImageView.contentMode = .scaleAspectFit
+            layoutSubviews()
+        } else {
+            AsynchronousImageLoader.shared.requestImage(forCell: self, index: newIndex)
+        }
+    }
 }

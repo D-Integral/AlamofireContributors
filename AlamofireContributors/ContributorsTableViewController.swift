@@ -39,22 +39,8 @@ class ContributorsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContributorCell", for: indexPath)
         
         if let contributorCell = cell as? ContributorCell {
-            let contributor = contributors[indexPath.row]
-            
-            contributorCell.contributorNameLabel.text = contributor.login
-            contributorCell.index = indexPath.row
-            contributorCell.URL = contributor.avatar_url
-            
-            let cachedData: Data
-            
-            if let cachedVersion = Cache.shared.dataForKey(contributor.avatar_url.absoluteString) {
-                cachedData = cachedVersion as Data
-                contributorCell.contributorAvatarImageView.image = UIImage(data: cachedData as Data)
-                contributorCell.contributorAvatarImageView.contentMode = .scaleAspectFit
-                contributorCell.layoutSubviews()
-            } else {
-                AsynchronousImageLoader.shared.requestImage(forCell: contributorCell, index: indexPath.row)
-            }
+            contributorCell.update(withContributor: contributors[indexPath.row],
+                                   newIndex: indexPath.row)
         }
 
         return cell
