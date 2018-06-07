@@ -53,20 +53,20 @@ class ContributorsTableViewController: UITableViewController {
             let cachedData: Data
             let key = contributor.avatar_url.absoluteString
             
-            if let cachedVersion = Cache.shared.cache.object(forKey: key as NSString) {
+            if let cachedVersion = Cache.shared.dataForKey(key) {
                 cachedData = cachedVersion as Data
                 contributorCell.contributorAvatarImageView.image = UIImage(data: cachedData as Data)
                 contributorCell.contributorAvatarImageView.contentMode = .scaleAspectFit
                 contributorCell.layoutSubviews()
             } else {
                 let dispatchWorkItemGlobal = DispatchWorkItem {
-                    if let data = NSData(contentsOf: contributor.avatar_url) {
-                        Cache.shared.cache.setObject(data, forKey: key as NSString)
+                    if let data = try? Data(contentsOf: contributor.avatar_url) {
+                        Cache.shared.setData(data, forKey: key)
                         
                         if contributorCell.index == index {
                             let dispatchWorkItemMain = DispatchWorkItem {
                                 contributorCell.contributorAvatarImageView.image = UIImage(data: data as Data)
-                                cell.layoutSubviews()
+                                contributorCell.layoutSubviews()
                             }
                             
                             contributorCell.asynchronousImageLoadingDispatchWorkItemMain = dispatchWorkItemMain
@@ -90,15 +90,15 @@ class ContributorsTableViewController: UITableViewController {
             let contributor = contributors[selectedRow]
             let key = contributor.avatar_url.absoluteString
             
-            if let cachedVersion = Cache.shared.cache.object(forKey: key as NSString) {
+            if let cachedVersion = Cache.shared.dataForKey(key) {
                 detailsVC.avatarImageData = cachedVersion as Data
                 detailsVC.numberOfContributions = contributor.contributions
             } else {
                 detailsVC.title = contributor.login
                 
                 DispatchQueue.global(qos: .userInitiated).async {
-                    if let data = NSData(contentsOf: contributor.avatar_url) {
-                        Cache.shared.cache.setObject(data, forKey: key as NSString)
+                    if let data = try? Data(contentsOf: contributor.avatar_url) {
+                        Cache.shared.setData(data, forKey: key)
                         DispatchQueue.main.async {
                             detailsVC.avatarImageData = data as Data
                             detailsVC.numberOfContributions = contributor.contributions
