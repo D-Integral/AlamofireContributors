@@ -94,18 +94,7 @@ class ContributorsTableViewController: UITableViewController {
                 detailsVC.avatarImageData = cachedVersion as Data
                 detailsVC.numberOfContributions = contributor.contributions
             } else {
-                detailsVC.title = contributor.login
-                
-                DispatchQueue.global(qos: .userInitiated).async {
-                    if let data = try? Data(contentsOf: contributor.avatar_url) {
-                        Cache.shared.setData(data, forKey: key)
-                        DispatchQueue.main.async {
-                            detailsVC.avatarImageData = data as Data
-                            detailsVC.numberOfContributions = contributor.contributions
-                            detailsVC.update()
-                        }
-                    }
-                }
+                detailsVC.update(withContributor: contributor)
             }
         }
     }
