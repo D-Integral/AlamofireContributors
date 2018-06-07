@@ -38,7 +38,14 @@ class ContributorCell: UITableViewCell {
             contributorAvatarImageView.contentMode = .scaleAspectFit
             layoutSubviews()
         } else {
-            AsynchronousImageLoader.shared.requestImage(forCell: self, index: newIndex)
+            AsynchronousImageLoader.shared.requestImage(URL: contributor.avatar_url, index: newIndex) { [weak self]
+                data, receivedImageIndex in
+                guard let this = self else { return }
+                if this.index == receivedImageIndex {
+                    this.contributorAvatarImageView.image = UIImage(data: data as Data)
+                    this.layoutSubviews()
+                }
+            }
         }
     }
 }
