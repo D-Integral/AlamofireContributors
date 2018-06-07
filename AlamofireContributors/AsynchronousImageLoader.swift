@@ -37,6 +37,31 @@ class AsynchronousImageLoader: NSObject {
         remove(from: &itemsOnGlobalQueues, URL: URL)
     }
     
+    func requestImage(forCell cell: ContributorCell, index: Int) {
+        if let URL = cell.URL {
+            let dispatchWorkItemGlobal = DispatchWorkItem { [weak self] in
+                guard let this = self else { return }
+                
+                if let data = try? Data(contentsOf: URL) {
+                    Cache.shared.setData(data, forKey: URL.absoluteString)
+                    
+                    if cell.index == index {
+                        let dispatchWorkItemMain = DispatchWorkItem {
+                            cell.contributorAvatarImageView.image = UIImage(data: data as Data)
+                            cell.layoutSubviews()
+                            this.removeFromMainQueue(forURL:URL)
+                        }
+                        
+                        this.executeOnMainQueue(dispatchWorkItemMain, URL: URL)
+                        this.removeFromGlobalQueue(forURL: URL)
+                    }
+                }
+            }
+            
+            executeOnGlobalQueue(dispatchWorkItemGlobal, URL: URL)
+        }
+    }
+    
     private func remove(from items: inout [String: DispatchWorkItem], URL: URL) {
         let item = items[URL.absoluteString]
         

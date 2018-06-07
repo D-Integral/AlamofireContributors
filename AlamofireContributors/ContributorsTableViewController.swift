@@ -60,24 +60,7 @@ class ContributorsTableViewController: UITableViewController {
                 contributorCell.contributorAvatarImageView.contentMode = .scaleAspectFit
                 contributorCell.layoutSubviews()
             } else {
-                let dispatchWorkItemGlobal = DispatchWorkItem {
-                    if let data = try? Data(contentsOf: contributor.avatar_url) {
-                        Cache.shared.setData(data, forKey: key)
-                        
-                        if contributorCell.index == index {
-                            let dispatchWorkItemMain = DispatchWorkItem {
-                                contributorCell.contributorAvatarImageView.image = UIImage(data: data as Data)
-                                contributorCell.layoutSubviews()
-                                AsynchronousImageLoader.shared.removeFromMainQueue(forURL: contributor.avatar_url)
-                            }
-                            
-                            AsynchronousImageLoader.shared.executeOnMainQueue(dispatchWorkItemMain, URL: contributor.avatar_url)
-                            AsynchronousImageLoader.shared.removeFromGlobalQueue(forURL: contributor.avatar_url)
-                        }
-                    }
-                }
-                
-                AsynchronousImageLoader.shared.executeOnGlobalQueue(dispatchWorkItemGlobal, URL: contributor.avatar_url)
+                AsynchronousImageLoader.shared.requestImage(forCell: contributorCell, index: index)
             }
         }
 
