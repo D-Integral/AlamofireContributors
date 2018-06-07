@@ -10,17 +10,25 @@ import UIKit
 
 class APIClient: NSObject {
     static let shared = APIClient()
+    
+    let contributorsPath: String = "https://api.github.com/repos/Alamofire/Alamofire/contributors"
 
     func requestContributors(_ completionHandler: @escaping ([Contributor]) -> Void) {
-        if let url = URL(string: "https://api.github.com/repos/Alamofire/Alamofire/contributors") {
-            URLSession.shared.dataTask(with:url, completionHandler: {(data, response, error) in
+        contributorsDataTask(completionHandler)?.resume()
+    }
+    
+    func contributorsDataTask(_ completionHandler: @escaping ([Contributor]) -> Void) -> URLSessionDataTask? {
+        if let url = URL(string: contributorsPath) {
+            return URLSession.shared.dataTask(with:url, completionHandler: {(data, response, error) in
                 guard let data = data, error == nil else { return }
                 
                 let decoder = JSONDecoder()
                 if let contributors = try? decoder.decode([Contributor].self, from: data) {
                     completionHandler(contributors)
                 }
-            }).resume()
+            })
         }
+        
+        return nil
     }
 }

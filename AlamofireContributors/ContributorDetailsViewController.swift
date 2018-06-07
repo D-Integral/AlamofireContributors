@@ -71,4 +71,3 @@ class ContributorDetailsViewController: UIViewController {
     }
     
 }
-
