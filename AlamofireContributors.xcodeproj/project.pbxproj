@@ -34,6 +34,9 @@
 		C3E06C9F20C8569200D05D5F /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E06C9E20C8569200D05D5F /* Cache.swift */; };
 		C3E06CA020C8569200D05D5F /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E06C9E20C8569200D05D5F /* Cache.swift */; };
 		C3E06CA120C8569200D05D5F /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E06C9E20C8569200D05D5F /* Cache.swift */; };
+		C3E06CA320C98AC700D05D5F /* AsynchronousImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E06CA220C98AC700D05D5F /* AsynchronousImageLoader.swift */; };
+		C3E06CA420C98AC700D05D5F /* AsynchronousImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E06CA220C98AC700D05D5F /* AsynchronousImageLoader.swift */; };
+		C3E06CA520C98AC700D05D5F /* AsynchronousImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E06CA220C98AC700D05D5F /* AsynchronousImageLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +76,7 @@
 		C32108B820C55D4B002DC39F /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		C32108BC20C55E52002DC39F /* Contributor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contributor.swift; sourceTree = "<group>"; };
 		C3E06C9E20C8569200D05D5F /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		C3E06CA220C98AC700D05D5F /* AsynchronousImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchronousImageLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,12 +128,13 @@
 			isa = PBXGroup;
 			children = (
 				C321087F20C554DE002DC39F /* AppDelegate.swift */,
-				C321088120C554DE002DC39F /* ContributorDetailsViewController.swift */,
-				C32108B020C555AA002DC39F /* ContributorsTableViewController.swift */,
-				C32108B420C5573B002DC39F /* ContributorCell.swift */,
 				C32108B820C55D4B002DC39F /* APIClient.swift */,
+				C3E06CA220C98AC700D05D5F /* AsynchronousImageLoader.swift */,
 				C3E06C9E20C8569200D05D5F /* Cache.swift */,
 				C32108BC20C55E52002DC39F /* Contributor.swift */,
+				C32108B420C5573B002DC39F /* ContributorCell.swift */,
+				C321088120C554DE002DC39F /* ContributorDetailsViewController.swift */,
+				C32108B020C555AA002DC39F /* ContributorsTableViewController.swift */,
 				C321088320C554DE002DC39F /* Main.storyboard */,
 				C321088920C554E0002DC39F /* Assets.xcassets */,
 				C321088B20C554E0002DC39F /* LaunchScreen.storyboard */,
@@ -289,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C321088220C554DE002DC39F /* ContributorDetailsViewController.swift in Sources */,
+				C3E06CA320C98AC700D05D5F /* AsynchronousImageLoader.swift in Sources */,
 				C32108B520C5573B002DC39F /* ContributorCell.swift in Sources */,
 				C3E06C9F20C8569200D05D5F /* Cache.swift in Sources */,
 				C32108BD20C55E52002DC39F /* Contributor.swift in Sources */,
@@ -304,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C321089820C554E0002DC39F /* AlamofireContributorsTests.swift in Sources */,
+				C3E06CA420C98AC700D05D5F /* AsynchronousImageLoader.swift in Sources */,
 				C32108BE20C55E52002DC39F /* Contributor.swift in Sources */,
 				C3E06CA020C8569200D05D5F /* Cache.swift in Sources */,
 				C32108B220C555AA002DC39F /* ContributorsTableViewController.swift in Sources */,
@@ -319,6 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C32108A320C554E0002DC39F /* AlamofireContributorsUITests.swift in Sources */,
+				C3E06CA520C98AC700D05D5F /* AsynchronousImageLoader.swift in Sources */,
 				C32108BF20C55E52002DC39F /* Contributor.swift in Sources */,
 				C3E06CA120C8569200D05D5F /* Cache.swift in Sources */,
 				C32108B320C555AA002DC39F /* ContributorsTableViewController.swift in Sources */,

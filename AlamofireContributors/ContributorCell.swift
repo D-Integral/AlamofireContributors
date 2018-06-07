@@ -12,9 +12,8 @@ class ContributorCell: UITableViewCell {
     
     @IBOutlet weak var contributorAvatarImageView: UIImageView!
     @IBOutlet weak var contributorNameLabel: UILabel!
-    var asynchronousImageLoadingDispatchWorkItemGlobal: DispatchWorkItem? = nil
-    var asynchronousImageLoadingDispatchWorkItemMain: DispatchWorkItem? = nil
     var index: Int? = nil
+    var URL: URL? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,10 +21,11 @@ class ContributorCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        asynchronousImageLoadingDispatchWorkItemGlobal?.cancel()
-        asynchronousImageLoadingDispatchWorkItemGlobal = nil
-        asynchronousImageLoadingDispatchWorkItemMain?.cancel()
-        asynchronousImageLoadingDispatchWorkItemMain = nil
+        if let theURL = URL {
+            AsynchronousImageLoader.shared.cancel(forURL: theURL)
+            URL = nil
+        }
+        
         contributorAvatarImageView.image = nil
         contributorNameLabel.text = nil
     }

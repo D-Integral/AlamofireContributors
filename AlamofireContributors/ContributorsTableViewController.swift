@@ -49,6 +49,7 @@ class ContributorsTableViewController: UITableViewController {
             contributorCell.contributorNameLabel.text = contributor.login
             let index = indexPath.row
             contributorCell.index = index
+            contributorCell.URL = contributor.avatar_url
             
             let cachedData: Data
             let key = contributor.avatar_url.absoluteString
@@ -67,17 +68,16 @@ class ContributorsTableViewController: UITableViewController {
                             let dispatchWorkItemMain = DispatchWorkItem {
                                 contributorCell.contributorAvatarImageView.image = UIImage(data: data as Data)
                                 contributorCell.layoutSubviews()
+                                AsynchronousImageLoader.shared.removeFromMainQueue(forURL: contributor.avatar_url)
                             }
                             
-                            contributorCell.asynchronousImageLoadingDispatchWorkItemMain = dispatchWorkItemMain
-                            
-                            DispatchQueue.main.async(execute: dispatchWorkItemMain)
+                            AsynchronousImageLoader.shared.executeOnMainQueue(dispatchWorkItemMain, URL: contributor.avatar_url)
+                            AsynchronousImageLoader.shared.removeFromGlobalQueue(forURL: contributor.avatar_url)
                         }
                     }
                 }
                 
-                contributorCell.asynchronousImageLoadingDispatchWorkItemGlobal = dispatchWorkItemGlobal
-                DispatchQueue.global(qos: .userInitiated).async(execute: dispatchWorkItemGlobal)
+                AsynchronousImageLoader.shared.executeOnGlobalQueue(dispatchWorkItemGlobal, URL: contributor.avatar_url)
             }
         }
 
