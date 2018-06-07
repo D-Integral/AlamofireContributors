@@ -18,24 +18,6 @@ class AsynchronousImageLoader: NSObject {
         removeFromGlobalQueue(forURL: URL)
         removeFromMainQueue(forURL: URL)
     }
-
-    func executeOnMainQueue(_ item: DispatchWorkItem, URL: URL) {
-        itemsOnMainQueue[URL.absoluteString] = item
-        DispatchQueue.main.async(execute: item)
-    }
-    
-    func executeOnGlobalQueue(_ item: DispatchWorkItem, URL: URL) {
-        itemsOnGlobalQueues[URL.absoluteString] = item
-        DispatchQueue.global(qos: .userInitiated).async(execute: item)
-    }
-    
-    func removeFromMainQueue(forURL URL: URL) {
-        remove(from: &itemsOnMainQueue, URL: URL)
-    }
-    
-    func removeFromGlobalQueue(forURL URL: URL) {
-        remove(from: &itemsOnGlobalQueues, URL: URL)
-    }
     
     func requestImage(forCell cell: ContributorCell, index: Int) {
         if let URL = cell.URL {
@@ -60,6 +42,26 @@ class AsynchronousImageLoader: NSObject {
             
             executeOnGlobalQueue(dispatchWorkItemGlobal, URL: URL)
         }
+    }
+    
+    // MARK: Private methods
+
+    private func executeOnMainQueue(_ item: DispatchWorkItem, URL: URL) {
+        itemsOnMainQueue[URL.absoluteString] = item
+        DispatchQueue.main.async(execute: item)
+    }
+    
+    private func executeOnGlobalQueue(_ item: DispatchWorkItem, URL: URL) {
+        itemsOnGlobalQueues[URL.absoluteString] = item
+        DispatchQueue.global(qos: .userInitiated).async(execute: item)
+    }
+    
+    private func removeFromMainQueue(forURL URL: URL) {
+        remove(from: &itemsOnMainQueue, URL: URL)
+    }
+    
+    private func removeFromGlobalQueue(forURL URL: URL) {
+        remove(from: &itemsOnGlobalQueues, URL: URL)
     }
     
     private func remove(from items: inout [String: DispatchWorkItem], URL: URL) {
