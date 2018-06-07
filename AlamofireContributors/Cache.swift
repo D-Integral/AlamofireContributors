@@ -2,7 +2,7 @@
 //  Cache.swift
 //  AlamofireContributors
 //
-//  Created by administrator on 6/6/18.
+//  Created by Dmytro Skorokhod on 6/6/18.
 //  Copyright © 2018 Dmytro Skorokhod. All rights reserved.
 //
 

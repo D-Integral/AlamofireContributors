@@ -87,15 +87,7 @@ class ContributorsTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let detailsVC = segue.destination as? ContributorDetailsViewController,
             let selectedRow = tableView.indexPathForSelectedRow?.row {
-            let contributor = contributors[selectedRow]
-            let key = contributor.avatar_url.absoluteString
-            
-            if let cachedVersion = Cache.shared.dataForKey(key) {
-                detailsVC.avatarImageData = cachedVersion as Data
-                detailsVC.numberOfContributions = contributor.contributions
-            } else {
-                detailsVC.update(withContributor: contributor)
-            }
+            detailsVC.update(withContributor: contributors[selectedRow])
         }
     }
 

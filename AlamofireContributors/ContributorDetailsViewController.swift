@@ -23,6 +23,20 @@ class ContributorDetailsViewController: UIViewController {
     }
     
     func update(withContributor contributor: Contributor) {
+        let key = contributor.avatar_url.absoluteString
+        
+        if let cachedVersion = Cache.shared.dataForKey(key) {
+            avatarImageData = cachedVersion as Data
+            numberOfContributions = contributor.contributions
+            updateIfLoaded()
+        } else {
+            requestUpdate(withContributor: contributor)
+        }
+    }
+    
+    // MARK: Private methods
+    
+    private func requestUpdate(withContributor contributor: Contributor) {
         title = contributor.login
         
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
@@ -39,8 +53,6 @@ class ContributorDetailsViewController: UIViewController {
             }
         }
     }
-    
-    // MARK: Private methods
     
     private func update() {
         if let data = avatarImageData, let image = UIImage(data: data) {
