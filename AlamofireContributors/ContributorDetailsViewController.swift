@@ -14,7 +14,16 @@ class ContributorDetailsViewController: UIViewController {
     @IBOutlet weak var numberOfContributionsLabel: UILabel!
     
     var avatarImageData: Data? = nil
-    var numberOfContributions: Int? = nil
+    
+    var contributor: Contributor? {
+        didSet {
+            if let theContributor = contributor {
+                title = theContributor.login
+                
+                requestUpdate()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,32 +31,24 @@ class ContributorDetailsViewController: UIViewController {
         update()
     }
     
-    func update(withContributor contributor: Contributor) {
-        let key = contributor.avatar_url.absoluteString
-        
-        if let cachedVersion = Cache.shared.dataForKey(key) {
-            avatarImageData = cachedVersion as Data
-            numberOfContributions = contributor.contributions
-            updateIfLoaded()
-        } else {
-            requestUpdate(withContributor: contributor)
+    override func viewWillDisappear(_ animated: Bool) {
+        if let theURL = contributor?.avatar_url {
+            ImageManager.shared.cancel(forURL: theURL)
         }
+        
+        super.viewWillDisappear(animated)
     }
     
     // MARK: Private methods
     
-    private func requestUpdate(withContributor contributor: Contributor) {
-        title = contributor.login
-        
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard let this = self else { return }
-            
-            if let data = try? Data(contentsOf: contributor.avatar_url) {
-                Cache.shared.setData(data, forKey: contributor.avatar_url.absoluteString)
+    private func requestUpdate() {
+        if let theURL = contributor?.avatar_url {
+            ImageManager.shared.requestImage(URL: theURL) { [weak self]
+                data, _ in
+                guard let this = self else { return }
                 
                 DispatchQueue.main.async {
                     this.avatarImageData = data as Data
-                    this.numberOfContributions = contributor.contributions
                     this.updateIfLoaded()
                 }
             }
@@ -59,7 +60,7 @@ class ContributorDetailsViewController: UIViewController {
             avatarImageView.image = image
         }
         
-        if let theNumberOfContributions = numberOfContributions {
+        if let theNumberOfContributions = contributor?.contributions {
             numberOfContributionsLabel.text = String(theNumberOfContributions)
         }
     }

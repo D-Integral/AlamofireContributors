@@ -8,8 +8,8 @@
 
 import UIKit
 
-class AsynchronousImageLoader: NSObject {
-    static let shared = AsynchronousImageLoader()
+class ImageManager: NSObject {
+    static let shared = ImageManager()
     
     private var items = [String: DispatchWorkItem]()
     
@@ -27,7 +27,9 @@ class AsynchronousImageLoader: NSObject {
         let dispatchWorkItem = DispatchWorkItem { [weak self] in
             guard let this = self else { return }
             
-            if let data = try? Data(contentsOf: URL) {
+            if let cached = this.cached(forURL: URL) {
+                completionHandler(cached, URL)
+            } else if let data = try? Data(contentsOf: URL) {
                 Cache.shared.setData(data, forKey: URL.absoluteString)
                 this.items[URL.absoluteString] = nil
                 completionHandler(data, URL)
@@ -38,6 +40,14 @@ class AsynchronousImageLoader: NSObject {
     }
     
     // MARK: Private methods
+    
+    private func cached(forURL URL: URL) -> Data? {
+        if let cachedData = Cache.shared.dataForKey(URL.absoluteString) {
+            return cachedData
+        }
+        
+        return nil
+    }
     
     private func execute(_ item: DispatchWorkItem, URL: URL) {
         items[URL.absoluteString] = item

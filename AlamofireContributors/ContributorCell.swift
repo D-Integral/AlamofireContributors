@@ -16,7 +16,7 @@ class ContributorCell: UITableViewCell {
     
     override func prepareForReuse() {
         if let theContributor = contributor {
-            AsynchronousImageLoader.shared.cancel(forURL: theContributor.avatar_url)
+            ImageManager.shared.cancel(forURL: theContributor.avatar_url)
             contributor = nil
         }
         
@@ -29,19 +29,13 @@ class ContributorCell: UITableViewCell {
         contributorNameLabel.text = contributor?.login
         
         if let theURL = contributor?.avatar_url {
-            if let cachedData = Cache.shared.dataForKey(theURL.absoluteString) {
-                contributorAvatarImageView.image = UIImage(data: cachedData)
-                contributorAvatarImageView.contentMode = .scaleAspectFit
-                layoutSubviews()
-            } else {
-                AsynchronousImageLoader.shared.requestImage(URL: theURL) { [weak self]
-                    data, receivedImageURL in
-                    guard let this = self else { return }
-                    if this.contributor?.avatar_url == receivedImageURL {
-                        DispatchQueue.main.async {
-                            this.contributorAvatarImageView.image = UIImage(data: data as Data)
-                            this.layoutSubviews()
-                        }
+            ImageManager.shared.requestImage(URL: theURL) { [weak self]
+                data, receivedImageURL in
+                guard let this = self else { return }
+                if this.contributor?.avatar_url == receivedImageURL {
+                    DispatchQueue.main.async {
+                        this.contributorAvatarImageView.image = UIImage(data: data as Data)
+                        this.layoutSubviews()
                     }
                 }
             }

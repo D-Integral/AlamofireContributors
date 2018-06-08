@@ -49,7 +49,7 @@ class ContributorsTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let detailsVC = segue.destination as? ContributorDetailsViewController,
             let selectedRow = tableView.indexPathForSelectedRow?.row {
-            detailsVC.update(withContributor: contributors[selectedRow])
+            detailsVC.contributor = contributors[selectedRow]
         }
     }
 
