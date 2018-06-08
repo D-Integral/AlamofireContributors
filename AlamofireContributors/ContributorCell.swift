@@ -12,38 +12,37 @@ class ContributorCell: UITableViewCell {
     
     @IBOutlet weak var contributorAvatarImageView: UIImageView!
     @IBOutlet weak var contributorNameLabel: UILabel!
-    var index: Int? = nil
-    var URL: URL? = nil
+    var contributor: Contributor? = nil
     
     override func prepareForReuse() {
-        if let theURL = URL {
-            AsynchronousImageLoader.shared.cancel(forURL: theURL)
-            URL = nil
+        if let theContributor = contributor {
+            AsynchronousImageLoader.shared.cancel(forURL: theContributor.avatar_url)
+            contributor = nil
         }
         
         contributorAvatarImageView.image = nil
         contributorNameLabel.text = nil
     }
 
-    func update(withContributor contributor: Contributor, newIndex: Int) {
-        contributorNameLabel.text = contributor.login
-        index = newIndex
-        URL = contributor.avatar_url
+    func update(withContributor newContributor: Contributor, newIndex: Int) {
+        contributor = newContributor
+        contributorNameLabel.text = contributor?.login
         
-        let cachedData: Data
-        
-        if let cachedVersion = Cache.shared.dataForKey(contributor.avatar_url.absoluteString) {
-            cachedData = cachedVersion as Data
-            contributorAvatarImageView.image = UIImage(data: cachedData as Data)
-            contributorAvatarImageView.contentMode = .scaleAspectFit
-            layoutSubviews()
-        } else {
-            AsynchronousImageLoader.shared.requestImage(URL: contributor.avatar_url, index: newIndex) { [weak self]
-                data, receivedImageIndex in
-                guard let this = self else { return }
-                if this.index == receivedImageIndex {
-                    this.contributorAvatarImageView.image = UIImage(data: data as Data)
-                    this.layoutSubviews()
+        if let theURL = contributor?.avatar_url {
+            if let cachedData = Cache.shared.dataForKey(theURL.absoluteString) {
+                contributorAvatarImageView.image = UIImage(data: cachedData)
+                contributorAvatarImageView.contentMode = .scaleAspectFit
+                layoutSubviews()
+            } else {
+                AsynchronousImageLoader.shared.requestImage(URL: theURL) { [weak self]
+                    data, receivedImageURL in
+                    guard let this = self else { return }
+                    if this.contributor?.avatar_url == receivedImageURL {
+                        DispatchQueue.main.async {
+                            this.contributorAvatarImageView.image = UIImage(data: data as Data)
+                            this.layoutSubviews()
+                        }
+                    }
                 }
             }
         }
