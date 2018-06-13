@@ -37,6 +37,9 @@
 		C3E06CA320C98AC700D05D5F /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E06CA220C98AC700D05D5F /* ImageManager.swift */; };
 		C3E06CA420C98AC700D05D5F /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E06CA220C98AC700D05D5F /* ImageManager.swift */; };
 		C3E06CA520C98AC700D05D5F /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E06CA220C98AC700D05D5F /* ImageManager.swift */; };
+		C3E06CAF20CEB8CE00D05D5F /* DiscardableCacheItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E06CAE20CEB8CE00D05D5F /* DiscardableCacheItem.swift */; };
+		C3E06CB020CEB8CE00D05D5F /* DiscardableCacheItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E06CAE20CEB8CE00D05D5F /* DiscardableCacheItem.swift */; };
+		C3E06CB120CEB8CE00D05D5F /* DiscardableCacheItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E06CAE20CEB8CE00D05D5F /* DiscardableCacheItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +80,7 @@
 		C32108BC20C55E52002DC39F /* Contributor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contributor.swift; sourceTree = "<group>"; };
 		C3E06C9E20C8569200D05D5F /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		C3E06CA220C98AC700D05D5F /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		C3E06CAE20CEB8CE00D05D5F /* DiscardableCacheItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscardableCacheItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +139,7 @@
 				C32108B420C5573B002DC39F /* ContributorCell.swift */,
 				C321088120C554DE002DC39F /* ContributorDetailsViewController.swift */,
 				C32108B020C555AA002DC39F /* ContributorsTableViewController.swift */,
+				C3E06CAE20CEB8CE00D05D5F /* DiscardableCacheItem.swift */,
 				C321088320C554DE002DC39F /* Main.storyboard */,
 				C321088920C554E0002DC39F /* Assets.xcassets */,
 				C321088B20C554E0002DC39F /* LaunchScreen.storyboard */,
@@ -299,6 +304,7 @@
 				C3E06C9F20C8569200D05D5F /* Cache.swift in Sources */,
 				C32108BD20C55E52002DC39F /* Contributor.swift in Sources */,
 				C32108B120C555AA002DC39F /* ContributorsTableViewController.swift in Sources */,
+				C3E06CAF20CEB8CE00D05D5F /* DiscardableCacheItem.swift in Sources */,
 				C321088020C554DE002DC39F /* AppDelegate.swift in Sources */,
 				C321088820C554DE002DC39F /* AlamofireContributors.xcdatamodeld in Sources */,
 				C32108B920C55D4B002DC39F /* APIClient.swift in Sources */,
@@ -315,6 +321,7 @@
 				C3E06CA020C8569200D05D5F /* Cache.swift in Sources */,
 				C32108B220C555AA002DC39F /* ContributorsTableViewController.swift in Sources */,
 				C32108B620C5573B002DC39F /* ContributorCell.swift in Sources */,
+				C3E06CB020CEB8CE00D05D5F /* DiscardableCacheItem.swift in Sources */,
 				C3E06C5F20C7DC1000D05D5F /* AppDelegate.swift in Sources */,
 				C32108BA20C55D4B002DC39F /* APIClient.swift in Sources */,
 				C3E06C5D20C7DC0600D05D5F /* ContributorDetailsViewController.swift in Sources */,
@@ -331,6 +338,7 @@
 				C3E06CA120C8569200D05D5F /* Cache.swift in Sources */,
 				C32108B320C555AA002DC39F /* ContributorsTableViewController.swift in Sources */,
 				C32108B720C5573B002DC39F /* ContributorCell.swift in Sources */,
+				C3E06CB120CEB8CE00D05D5F /* DiscardableCacheItem.swift in Sources */,
 				C3E06C6020C7DC1100D05D5F /* AppDelegate.swift in Sources */,
 				C32108BB20C55D4B002DC39F /* APIClient.swift in Sources */,
 				C3E06C5E20C7DC0600D05D5F /* ContributorDetailsViewController.swift in Sources */,

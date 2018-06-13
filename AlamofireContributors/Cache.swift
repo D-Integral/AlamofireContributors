@@ -11,13 +11,15 @@ import UIKit
 class Cache: NSObject {
     static let shared = Cache()
     
-    let cache = NSCache<NSString, NSData>()
+    let cache = NSCache<NSString, DiscardableCacheItem>()
     
     func setData(_ data: Data, forKey key: String) {
-        cache.setObject(data as NSData, forKey: key as NSString)
+        let cacheItem = DiscardableCacheItem(data: data as NSData)
+        cache.setObject(cacheItem, forKey: key as NSString)
     }
     
     func dataForKey(_ key: String) -> Data? {
-        return cache.object(forKey: key as NSString) as Data?
+        let cacheItem = cache.object(forKey: key as NSString)
+        return cacheItem?.data as Data?
     }
 }
