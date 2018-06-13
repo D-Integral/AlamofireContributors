@@ -14,7 +14,10 @@ class APIClient: NSObject {
     let contributorsPath: String = "https://api.github.com/repos/Alamofire/Alamofire/contributors"
 
     func requestContributors(_ completionHandler: @escaping ([Contributor]) -> Void) {
-        contributorsDataTask(completionHandler)?.resume()
+        DispatchQueue.global().async { [weak self] in
+            guard let this = self else { return }
+            this.contributorsDataTask(completionHandler)?.resume()
+        }
     }
     
     func contributorsDataTask(_ completionHandler: @escaping ([Contributor]) -> Void) -> URLSessionDataTask? {
